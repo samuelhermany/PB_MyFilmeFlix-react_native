@@ -1,4 +1,3 @@
-import DetalheShowScreen from './screens/DetalhesShow';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -6,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './screens/HomeScreen';
 import EmCartazScreen from './screens/EmCartazScreen';
+import DetalheShowScreen from './screens/DetalhesShow';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
