@@ -6,13 +6,6 @@ export default function DetalheShowScreen({ route }) {
    const { movie } = route.params;
    const { title: titulo, overview: sinopse, runtime: duracao, genres: generos, release_date: data_lancamento, adult, production_countries } = movie;
 
-   //  title: titulo,
-   //  overview: sinopse,
-   //  runtime: duracao,
-   //  genres,
-   //  release_date,
-   //  adult,
-   //  production_countries,
    return (
       <View style={Styles.container}>
          <View style={Styles.imageContainer}>
@@ -35,11 +28,11 @@ export default function DetalheShowScreen({ route }) {
 }
 
 const styles = StyleSheet.create({
-   container: {
-     margin: 10,
-     alignItems: 'center',
-     paddingHorizontal: 10,
-   },
+   // container: {
+   //   margin: 10,
+   //   alignItems: 'center',
+   //   paddingHorizontal: 10,
+   // },
    imageContainer: {
       paddingHorizontal: 10,
       width: 150,
