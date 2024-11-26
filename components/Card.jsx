@@ -12,7 +12,7 @@ export function Card({movie}) {
          style={styles.container}
          onPress={() => navigation.navigate('detalhes', { movie: movie })}
       >
-      <View style={styles.imageContainer}>         
+      <View style={styles.imageContainer}>
          <Image
             style={styles.image}
             source={{ uri: `${VITE_IMG_URL}${movie.poster_path}`}}          

@@ -18,7 +18,7 @@ export default function DetalheShowScreen({ route }) {
          <View style={Styles.imageContainer}>
             <Image
                style={styles.image1}
-               source={{ uri: `${VITE_IMG_URL}${movie.poster_path}`}}          
+               source={{ uri: `${VITE_IMG_URL}${movie.poster_path}`}}
             />
          </View>
          <View>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
       height: 225,
    },
    image1: {
-   //   width: '100%',
+     width: '100%',
      height: '50%',
      resizeMode:"cover",
      borderRadius: 8,

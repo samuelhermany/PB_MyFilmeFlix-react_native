@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native';
-import { VITE_API_KEY, VITE_API_URL, VITE_API_URL_MOVIE, VITE_IMG_154 } from '@env';
+import { VITE_IMG_URL, VITE_API_KEY, VITE_API_URL, VITE_API_URL_MOVIE, VITE_IMG_154 } from '@env';
 import { Card } from '../components/Card';
 
 export default function HomeScreen() {
   const [topMovies, setTopMovies] = useState([]);
   const [loading, setLoading] = useState(true); // Para mostrar um carregando enquanto aguarda a resposta
-  const url = `${VITE_API_URL}top_rated?${VITE_API_KEY}`;
+//   const url = `${VITE_API_URL}top_rated?${VITE_API_KEY}`;
 
    // Função para buscar os filmes com melhor avaliação
    const getTopRatedMovies = async () => {
