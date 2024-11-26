@@ -63,7 +63,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#141414',
       padding: 10,
    },
    title: {
@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       marginBottom: 10,
       textAlign: 'center',
+      color: '#e5e5e5',
    },
    movieContainer: {
       marginVertical: 10,

@@ -6,7 +6,7 @@ import HomeScreen from './screens/HomeScreen';
 import EmCartazScreen from './screens/EmCartazScreen';
 import DetalheShowScreen from './screens/DetalhesShow';
 import { MaterialIcons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
+// import { FontAwesome } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -15,7 +15,19 @@ const Drawer = createDrawerNavigator();
 export default function App() {
    return (
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Drawer.Navigator
+         screenOptions={{
+            headerStyle: { backgroundColor: '#4CAF50'},// Cor de fundo do cabeçalho
+            headerTintColor: '#e5e5e5', // Cor dos textos e ícones no cabeçalho
+            drawerStyle: {
+               backgroundColor: '#141414', // Cor de fundo do Drawer
+               color: "#e5e5e5",
+            },
+            drawerActiveTintColor: '#ffffff', 
+            drawerInactiveTintColor: '#ffffff',
+            drawerActiveBackgroundColor: '#4CAF50',
+         }}     
+      >
 
          {/* Tela Home */}
          <Drawer.Screen
@@ -36,7 +48,7 @@ export default function App() {
          />
 
          {/* Tela Detalhes */}
-         <Drawer.Screen 
+         <Drawer.Screen
             name="detalhes" 
             component={DetalheShowScreen} 
             options={({ navigation }) => ({

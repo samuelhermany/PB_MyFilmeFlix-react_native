@@ -25,7 +25,7 @@ export function Card({movie}) {
 const styles = StyleSheet.create({
    container: {
      margin: 10,
-     alignItems: 'center',
+     alignItems: 'center',     
    },
    imageContainer: {
      width: 150,
@@ -42,5 +42,6 @@ const styles = StyleSheet.create({
      fontSize: 16,
      fontWeight: 'bold',
      textAlign: 'center',
+     color: '#e5e5e5',
    },
  });

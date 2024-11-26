@@ -7,16 +7,16 @@ export default function DetalheShowScreen({ route }) {
    const { title: titulo, overview: sinopse, runtime: duracao, genres: generos, release_date: data_lancamento, adult, production_countries } = movie;
 
    return (
-      <View style={Styles.container}>
+      <View style={Styles.container1}>
          <View style={Styles.imageContainer}>
             <Image
-               style={styles.image1}
+               style={styles.image}
                source={{ uri: `${VITE_IMG_URL}${movie.poster_path}`}}
             />
          </View>
          <View>
-            <Text style={Styles.header2}>{titulo}</Text>
-            <Text style={Styles.header3}>{sinopse}</Text>
+            <Text style={Styles.title}>{titulo}</Text>
+            <Text style={Styles.text}>{sinopse}</Text>
             <Text style={Styles.text}>Duração: {duracao} minutos</Text>
             <Text style={Styles.text}>Gêneros: {generos?.map(genre => genre.name).join(', ')}</Text>
             <Text style={Styles.text}>Lançamento: {data_lancamento}</Text>
@@ -26,28 +26,3 @@ export default function DetalheShowScreen({ route }) {
       </View>
    );
 }
-
-const styles = StyleSheet.create({
-   // container: {
-   //   margin: 10,
-   //   alignItems: 'center',
-   //   paddingHorizontal: 10,
-   // },
-   imageContainer: {
-      paddingHorizontal: 10,
-      width: 150,
-      height: 225,
-   },
-   image1: {
-     width: '100%',
-     height: '50%',
-     resizeMode:"cover",
-     borderRadius: 8,
-   },
-   title: {
-     marginTop: 10,
-     fontSize: 16,
-     fontWeight: 'bold',
-     textAlign: 'center',
-   },
- });
