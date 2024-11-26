@@ -16,7 +16,7 @@ function HomeStack() {
     <Stack.Navigator>
       <Stack.Screen
         name="home"
-        options={{ title: 'Início' }}
+        options={{ title: 'Início', headerShown: false }}
         component={HomeScreen}
       />
       <Stack.Screen
@@ -27,7 +27,7 @@ function HomeStack() {
     </Stack.Navigator>
   );
 }
-//PB_MyFilmeFlix-react_native
+
 export default function App() {
   return (
     <NavigationContainer>
