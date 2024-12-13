@@ -82,36 +82,36 @@ function DrawerNavigator() {
          }}
       >
          <Drawer.Screen
-         name="home"
-         component={HomeScreen}
-         options={{
-            title: 'Início',
-            drawerIcon: () => <MaterialIcons name="home" size={24} color="black" />,
-         }}
+            name="home"
+            component={HomeScreen}
+            options={{
+               title: 'Início',
+               drawerIcon: () => <MaterialIcons name="home" size={24} color="black" />,
+            }}
          />
          <Drawer.Screen
-         name="emCartaz"
-         component={EmCartazScreen}
-         options={{ title: 'Em Cartaz' }}
+            name="emCartaz"
+            component={EmCartazScreen}
+            options={{ title: 'Em Cartaz' }}
          />
          <Drawer.Screen
-         name="detalhes"
-         component={DetalheShowScreen}
-         options={({ navigation }) => ({
-            title: 'Detalhes',
-            drawerLabel: () => null, // Oculta a opção no Drawer
-            headerRight: () => (
-               <MaterialIcons
-               name="home"
-               size={24}
-               color="black"
-               style={{ marginRight: 15 }}
-               onPress={() => navigation.navigate('home')}
-               />
-            ),                    
-            unmountOnBlur: true,  // Impede o usuário de acessar a tela de Detalhes via navegação direta          
-            drawerItemStyle: { display: 'none' }, // Impede que o Drawer apareça quando tentando acessar a tela Detalhes
-         })}
+            name="detalhes"
+            component={DetalheShowScreen}
+            options={({ navigation }) => ({
+               title: 'Detalhes',
+               drawerLabel: () => null, // Oculta a opção no Drawer
+               headerRight: () => (
+                  <MaterialIcons
+                  name="home"
+                  size={24}
+                  color="black"
+                  style={{ marginRight: 15 }}
+                  onPress={() => navigation.navigate('home')}
+                  />
+               ),                    
+               unmountOnBlur: true,  // Impede o usuário de acessar a tela de Detalhes via navegação direta          
+               drawerItemStyle: { display: 'none' }, // Impede que o Drawer apareça quando tentando acessar a tela Detalhes
+            })}
          />    
          {/* <Drawer.Screen
          name="logout"

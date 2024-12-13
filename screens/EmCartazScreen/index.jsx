@@ -3,14 +3,14 @@ import { View, Text, FlatList, TextInput, ScrollView } from 'react-native';
 import { Card } from '../../components/Card';
 import styles from "./indexStyle";
 
-export default function HomeScreen() {
+export default function EmCartazScreen() {
   const [filmes, setFilmes] = useState([]);
   const [filmesFiltrados, setFilmesFiltrados] = useState([]);;
   const [loading, setLoading] = useState(true);
   const [filtro, setFiltro] = useState('');
 
 
-  const getTopRatedMovies = async () => {
+  const getEmCartazMovies = async () => {
     try {
       const options = {
         method: 'GET',
@@ -22,7 +22,7 @@ export default function HomeScreen() {
       };
 
       const res = await fetch(
-        'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1',
+        'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
         options
       );
 
@@ -37,7 +37,7 @@ export default function HomeScreen() {
 
   // Carregamento inicial para popular os filmes
    useEffect(() => {
-      getTopRatedMovies();    
+      getEmCartazMovies();    
    }, []);
 
    const aplicarFiltro = () => {      
@@ -60,15 +60,15 @@ export default function HomeScreen() {
 
    return (
       <View>
-         <TextInput
+         {/* <TextInput
             style={styles.searchInput}
             placeholder="Buscar..."
             placeholderTextColor="#cccccc"
             value={filtro}
             onChangeText={(text) => setFiltro(text)}
-         />
+         /> */}
          <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
-            <Text style={styles.title}>Top Filmes</Text>    
+            <Text style={styles.title}>Em Cartaz</Text>    
             <FlatList
             data={filmes}
             renderItem={renderItem}
