@@ -4,13 +4,13 @@ import { TextInput, View, StyleSheet, Dimensions  } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';  // Importando o useNavigation
+import { useState } from 'react';
+import { AppProvider, useAppContext } from './Context'; 
+import styles from './AppStyle';
 import HomeScreen from './screens/HomeScreen';
 import EmCartazScreen from './screens/EmCartazScreen';
 import DetalheShowScreen from './screens/DetalhesShow';
 import AuthenticationScreen from './screens/AuthenticationScreen';
-import { useContext, useEffect, useState } from 'react';
-import { SearchProvider } from './SearchContext'; // Importa o Provider
-import { SearchContext } from './SearchContext'; 
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -18,25 +18,21 @@ const screenWidth = Dimensions.get('window').width;
 
 export default function App() {
   return (
-   <SearchProvider>
+   <AppProvider>
       <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
          {/* <Stack.Screen name="authentication" component={AuthenticationScreen} /> */}
-         <Stack.Screen name="home" component={DrawerNavigator} />
+         <Stack.Screen name="principal" component={DrawerNavigator} />
       </Stack.Navigator>
       </NavigationContainer>
-    </SearchProvider>
+    </AppProvider>
   );
 } 
 
 function DrawerNavigator() {   
-   const navigation = useNavigation();  // Aqui o useNavigation está sendo chamado corretamente
-   const [searchFiltro, setSearchFiltro] = useState('');
-   const { searchQuery, setSearchQuery } = useContext(SearchContext);
-   const handleSearch = () => {
-      console.log('Search query:', searchFiltro);
-      // Aqui você pode adicionar a lógica de busca (como uma requisição para buscar resultados)
-   };
+   const navigation = useNavigation();
+   const { filtro, setFiltro } = useAppContext();
+   const [searchInput, setSearchInput] = useState(''); 
 
    // Função de logout
    const logout = () => {
@@ -49,12 +45,6 @@ function DrawerNavigator() {
          routes: [{ name: 'authentication' }], // Nome da tela de autenticação
       });
    };
-
-   useEffect(() => {
-      // if (produtos.length > 0) {
-      //    aplicarFiltroEOrdenar();
-      // }
-   }, [searchFiltro]);
 
    return (
       <Drawer.Navigator
@@ -74,8 +64,8 @@ function DrawerNavigator() {
                style={styles.searchInput}
                placeholder="Buscar..."
                placeholderTextColor="#cccccc"
-               value={searchFiltro}
-               onChangeText={(text) => setSearchQuery(text)}
+               value={filtro}
+               onChangeText={(text) => setFiltro(text)}
             />
             </View>
          ),
@@ -132,20 +122,3 @@ function DrawerNavigator() {
 }
 
 
-const styles = StyleSheet.create({
-   searchContainer: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',      
-   },
-   searchInput: {
-      // flex: 1,
-      height: 40,
-      minWidth: screenWidth * 0.7,
-      backgroundColor: '#ffffff',
-      borderColor: '#cccccc',
-      borderWidth: 1,
-      borderRadius: 8,
-      paddingHorizontal: 10,
-   },
- });

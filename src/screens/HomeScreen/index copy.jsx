@@ -5,7 +5,7 @@ import styles from "./indexStyle";
 
 export default function HomeScreen() {
   const [filmes, setFilmes] = useState([]);
-  const [filmesFiltrados, setFilmesFiltrados] = useState([]);;
+  const [filmesFiltrados, setFilmesFiltrados] = useState(filmes);;
   const [loading, setLoading] = useState(true);
   const [filtro, setFiltro] = useState('');
 
@@ -48,7 +48,7 @@ export default function HomeScreen() {
       setFilmesFiltrados(filtrados);
    }
    // Atualziando a lista de filmes conforme txto de busca
-   useEffect(() => {
+   useEffect(() => {      
       aplicarFiltro();    
    }, [filtro]);
 
@@ -70,7 +70,7 @@ export default function HomeScreen() {
          <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
             <Text style={styles.title}>Top Filmes</Text>    
             <FlatList
-            data={filmes}
+            data={filmesFiltrados}
             renderItem={renderItem}
             keyExtractor={(item) => item.id.toString()}
             numColumns={2}

@@ -1,6 +1,6 @@
 import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { VITE_IMG_URL, VITE_API_KEY, VITE_API_URL, VITE_API_URL_MOVIE, VITE_IMG_154 } from '@env';
+import { VITE_IMG_URL } from '../../config';
 
 export function Card({movie}) {
    const navigation = useNavigation()

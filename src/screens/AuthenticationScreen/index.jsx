@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, Linking } from 'react-native';
-import config from '../../config';
+import config from '../../../config';
 
 export default function AuthenticationScreen() {
    const [requestToken, setRequestToken] = useState(null);

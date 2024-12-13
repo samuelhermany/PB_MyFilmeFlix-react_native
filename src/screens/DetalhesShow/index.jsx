@@ -1,6 +1,7 @@
 import { View , Text, StyleSheet, Image } from 'react-native';
 import Styles from './indexStyle';
-import { VITE_IMG_URL, VITE_API_KEY, VITE_API_URL, VITE_API_URL_MOVIE, VITE_IMG_154 } from '@env';
+import { VITE_IMG_URL } from '../../../config';
+import config from '../../../config';
 
 export default function DetalheShowScreen({ route }) {
    const { movie } = route.params;
