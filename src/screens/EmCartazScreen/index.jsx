@@ -60,13 +60,6 @@ export default function EmCartazScreen() {
 
    return (
       <View>
-         {/* <TextInput
-            style={styles.searchInput}
-            placeholder="Buscar..."
-            placeholderTextColor="#cccccc"
-            value={filtro}
-            onChangeText={(text) => setFiltro(text)}
-         /> */}
          <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
             <Text style={styles.title}>Em Cartaz</Text>    
             <FlatList

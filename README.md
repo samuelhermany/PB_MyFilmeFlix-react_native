@@ -1,18 +1,21 @@
 # PB_MyFilmeFlix-react_native
+
 PB_MyFilmeFlix-react_native
 
 # Instalar pacote
+
 npm install react-native-dotenv --save-dev
 npm install react-native-config
-
+npm install --save-dev jest @testing-library/react-native @testing-library/jest-native
 
 #Authenticação
-- Gerar um token para autenticação
-https://developer.themoviedb.org/reference/authentication-create-request-token
 
-- Gerar um ID Session
-https://developer.themoviedb.org/reference/authentication-create-session
+-  Gerar um token para autenticação
+   https://developer.themoviedb.org/reference/authentication-create-request-token
 
-- Obter favoritos TV
-https://developer.themoviedb.org/reference/account-favorite-tv
-- d
+-  Gerar um ID Session
+   https://developer.themoviedb.org/reference/authentication-create-session
+
+-  Obter favoritos TV
+   https://developer.themoviedb.org/reference/account-favorite-tv
+-  d

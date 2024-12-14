@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, TextInput, ScrollView } from 'react-native';
+import { View, Text, FlatList, ScrollView } from 'react-native';
 import { Card } from '../../components/Card';
 import { useAppContext } from '../../Context'; // Importa o hook do contexto
 import styles from './indexStyle';
@@ -15,13 +15,6 @@ export default function HomeScreen() {
 
   return (
     <View>
-      {/* <TextInput
-        style={styles.searchInput}
-        placeholder="Buscar..."
-        placeholderTextColor="#cccccc"
-        value={filtro}
-        onChangeText={(text) => setFiltro(text)}
-      /> */}
       <ScrollView
         style={styles.container}
         contentContainerStyle={{ flexGrow: 1 }}

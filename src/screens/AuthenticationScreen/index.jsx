@@ -1,32 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet, Linking } from 'react-native';
-import config from '../../../config';
+import { View, Text, Button, Linking } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Importando navigation
+import config from '../../config';
+import styles from './indexStyle.js';
 
 export default function AuthenticationScreen() {
    const [requestToken, setRequestToken] = useState(null);
    const [sessionId, setSessionId] = useState(null);
    const [loading, setLoading] = useState(false);
+   const [buttonTitle, setButtonTitle] = useState("Autorizar no TMDb");
 
    const API_URL = 'https://api.themoviedb.org/3';
    const BEARER_TOKEN = config.API_TOKEN; // Substitua pelo seu Bearer Token
+
+   const navigation = useNavigation(); // Usando useNavigation para navegar
 
    // 1. Obter o Request Token
    const fetchRequestToken = async () => {
       setLoading(true);
       try {
          const response = await fetch(`${API_URL}/authentication/token/new`, {
-         method: 'GET',
-         headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${BEARER_TOKEN}`,
-         },
+            method: 'GET',
+            headers: {
+               Accept: 'application/json',
+               Authorization: `Bearer ${BEARER_TOKEN}`,
+            },
          });
 
          const data = await response.json();
          if (data.success) {
-         setRequestToken(data.request_token);
+            setRequestToken(data.request_token);
          } else {
-         console.error('Erro ao obter request token:', data.status_message);
+            console.error('Erro ao obter request token:', data.status_message);
          }
       } catch (error) {
          console.error('Erro ao buscar request token:', error);
@@ -35,7 +40,7 @@ export default function AuthenticationScreen() {
       }
    };
 
-   // 2. Redirecionar o usuário para autorização (mantido para permitir o processo manual)
+   // 2. Redirecionar o usuário para autorização
    const redirectToAuthorization = () => {
       if (requestToken) {
          const authUrl = `https://www.themoviedb.org/authenticate/${requestToken}`;
@@ -51,7 +56,7 @@ export default function AuthenticationScreen() {
       } else {
          console.error('Nenhum request token disponível.');
       }
-   };   
+   };
 
    // 3. Trocar Request Token pelo Session ID
    const fetchSessionId = async () => {
@@ -63,20 +68,20 @@ export default function AuthenticationScreen() {
       setLoading(true);
       try {
          const response = await fetch(`${API_URL}/authentication/session/new`, {
-         method: 'POST',
-         headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${BEARER_TOKEN}`,
-            'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({ request_token: requestToken }),
+            method: 'POST',
+            headers: {
+               Accept: 'application/json',
+               Authorization: `Bearer ${BEARER_TOKEN}`,
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ request_token: requestToken }),
          });
 
          const data = await response.json();
          if (data.success) {
-         setSessionId(data.session_id);
+            setSessionId(data.session_id);
          } else {
-         console.error('Erro ao obter session ID:', data.status_message);
+            console.error('Erro ao obter session ID:', data.status_message);
          }
       } catch (error) {
          console.error('Erro ao buscar session ID:', error);
@@ -89,16 +94,37 @@ export default function AuthenticationScreen() {
       fetchRequestToken(); // Obtém o request token assim que o componente é montado
    }, []);
 
+   useEffect(() => {
+      if (sessionId) {
+         // Log para verificação do sessionId
+         console.log('Session ID obtido:', sessionId);
+         navigation.navigate('home');
+      }
+   }, [sessionId]); // Usando o useEffect para redirecionar quando sessionId for atualizado
+
+   // Função que verifica se o sessionId foi obtido e faz o redirecionamento
    const obterSessionId = async () => {
-      redirectToAuthorization();
-   
-      // Aguarde o usuário autorizar a autenticação antes de pegar o session ID
+      if (sessionId) {
+         // Já tem sessionId, então redireciona para a tela home
+         console.log('Redirecionando para a HomeScreen');
+         navigation.navigate('home');
+         return;
+      }
+
+      if (buttonTitle !== "Entrar") {
+         // O botão estava na fase de autorização, então vai autorizar
+         redirectToAuthorization();
+         setButtonTitle("Entrar");
+      }
+
+      // Aguarda o usuário autorizar a autenticação antes de pegar o session ID
       if (requestToken) {
          // O requestToken é obtido e autorizado antes de fazer o fetch para obter o session ID
          await fetchSessionId();
-   
+
          // Se o session ID for obtido com sucesso, redirecione para a tela HomeScreen
          if (sessionId) {
+            console.log('Redirecionando para a HomeScreen após obter sessionId');
             navigation.navigate('home');
          }
       } else {
@@ -106,60 +132,23 @@ export default function AuthenticationScreen() {
       }
    };
 
-   // Retorne apenas o session ID
-   if (sessionId) {
-      return (
-         <View style={styles.container}>
-         <Text style={styles.sessionId}>Session ID: {sessionId}</Text>
-         </View>
-      );
-   }
-
    // Se não houver sessionId, mostra o botão para redirecionamento e status de carregamento
    return (
-      <View style={styles.container}>      
-         <Button
-            title="Autorizar no TMDb"
-            onPress={obterSessionId}
-            disabled={!requestToken}
-         />
-         {/* <Button
-         title="Autorizar no TMDb"
-         onPress={redirectToAuthorization}
-         disabled={!requestToken}
-         /> */}
-         {/* <Button
-         title="Obter Session ID"
-         onPress={fetchSessionId}
-         disabled={!requestToken || loading}
-         /> */}
-         {loading && <Text style={styles.loading}>Carregando...</Text>}
+      <View style={styles.container}>
+          {/* Se já tiver sessionId, não exiba nada relacionado a ele */}
+          {!sessionId ? (
+            <>
+                <Button
+                  title={buttonTitle}
+                  onPress={obterSessionId}
+                  disabled={!requestToken}
+                />
+                {loading && <Text style={styles.loading}>Carregando...</Text>}
+            </>
+          ) : (
+            // O conteúdo aqui será ignorado, pois já está navegando para a HomeScreen
+            null
+          )}
       </View>
    );
 }
-
-const styles = StyleSheet.create({
-   container: {
-      flex: 1,
-      backgroundColor: '#141414',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 20,
-   },
-   title: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      color: '#e5e5e5',
-      marginBottom: 10,
-   },
-   sessionId: {
-      marginTop: 20,
-      fontSize: 16,
-      color: '#4caf50',
-   },
-   loading: {
-      marginTop: 10,
-      fontSize: 14,
-      color: '#ff9800',
-   },
-});
